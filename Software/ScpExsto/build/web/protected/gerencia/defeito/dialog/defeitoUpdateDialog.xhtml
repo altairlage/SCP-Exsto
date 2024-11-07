@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <p:dialog widgetVar="defeitoUpdateDialogWidget"
+                  id="defeitoUpdateDialogId" modal="true"
+                  closable="false" draggable="true" resizable="false"
+                  appendToBody="true" showEffect="drop" hideEffect="drop"
+                  closeOnEscape="true">
+
+            <h:form id="defeitoUpdateDialogForm" prependId="false">
+                <h:panelGrid columns="2">
+
+                    <h:outputText value="* Localização 1:" />
+                    <h:inputText value="#{defeitoMB.defeito.loc1}" required="true" requiredMessage="A localização 1 é obrigatória!" />
+
+                    <h:outputText value="Localização 2:" />
+                    <h:inputText value="#{defeitoMB.defeito.loc2}"/>
+
+                    <h:outputText value="Localização 3:" />
+                    <h:inputText value="#{defeitoMB.defeito.loc3}"/>
+
+                    <h:outputText value="Localização 4:" />
+                    <h:inputText value="#{defeitoMB.defeito.loc4}"/>
+
+                    <h:outputText value="Localização 5:" />
+                    <h:inputText value="#{defeitoMB.defeito.loc5}"/>
+                    
+                    <h:outputText value="Observações:" />
+                    <h:inputText value="#{defeitoMB.defeito.observacoes}"/>
+
+                    <h:outputText value="Classe do defeito:" />
+                    <h:selectOneMenu
+                        value="#{defeitoMB.defeito.classeDefeito}"
+                        label="Modelo">
+                        <f:selectItem
+                            itemLabel="Selecione o Defeito" noSelectionOption="true" />
+                        <f:selectItems
+                            value="#{defeitoMB.todasClassesDefObj}"
+                            var="classeDef" itemValue="#{classeDef}"
+                            itemLabel="#{classeDef.descricao}" />
+                    </h:selectOneMenu>
+                    
+                    <h:outputText value="Classe do solução:" />
+                    <h:selectOneMenu
+                        value="#{defeitoMB.defeito.classeSolucao}"
+                        label="Modelo">
+                        <f:selectItem
+                            itemLabel="Selecione a Solução" noSelectionOption="true" />
+                        <f:selectItems
+                            value="#{defeitoMB.todasClassesSolObj}"
+                            var="classeSol" itemValue="#{classeSol}"
+                            itemLabel="#{classeSol.descricao}" />
+                    </h:selectOneMenu>
+
+                    <p:commandButton value="Atualizar"
+                                     action="#{defeitoMB.update()}"
+                                     update=":messageGrowl :defeitoForm:defeitoTable"
+                                     oncomplete="closeDialogIfSucess(xhr, status, args, defeitoUpdateDialogWidget, 'defeitoUpdateDialogId')" />
+                    <p:commandButton value="Cancelar" actionListener="#{defeitoMB.reset()}"
+                                     onclick="defeitoUpdateDialogWidget.hide();" type="button" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

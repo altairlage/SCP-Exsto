@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <p:dialog widgetVar="pemDetailDialogWidget" id="pemDetailDialogId" modal="true"
+                  closable="false" draggable="true" resizable="false"
+                  appendToBody="true" showEffect="drop" hideEffect="drop"
+                  closeOnEscape="true">
+            
+            <h:form id="pemDetailDialogForm" prependId="false">
+                
+                <h:panelGrid columns="2">
+                    <h:outputText value="Número de série:"/>
+                    <h:outputText value="#{pemMB.pem.nserie}" />
+
+                    <h:outputText value="Refugo:"/>
+                    <h:outputText value="Sim" rendered="#{pemMB.pem.refugo}" />
+                    <h:outputText value="Não" rendered="#{!pemMB.pem.refugo}" />
+
+                    <h:outputText value="Motivo do refugo:"/>
+                    <h:outputText value="#{pemMB.pem.motivoRefugo}"/>
+
+                    <h:outputText value="Etapa de produção:"/>
+                    <h:outputText value="#{pemMB.pem.etapa}"/>
+
+                    <h:outputText value="Modelo:"/>
+                    <h:outputText value="#{pemMB.pem.modelo.modelo}"/>
+
+                    <h:outputText value="Revisão:"/>
+                    <h:outputText value="#{pemMB.pem.modelo.revisao}"/>
+                </h:panelGrid>
+                
+                <p:commandButton value="Voltar" icon="ui-icon-arrowthick-1-7" action="#{pemMB.voltar()}" ajax="false"  /> 
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

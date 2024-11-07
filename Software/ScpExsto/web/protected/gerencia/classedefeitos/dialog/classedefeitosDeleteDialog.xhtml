@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <p:dialog widgetVar="classedefeitosDeleteDialogWidget" id="classedefeitosDeleteDialogId" modal="true"
+                  closable="false" draggable="true" resizable="false"
+                  appendToBody="true" showEffect="drop" hideEffect="drop"
+                  closeOnEscape="true">
+            <h:form id="classedefeitosDeleteDialogForm" prependId="false">
+
+                <h:outputText value="Tem certeza que deseja deletar a classe '#{classedefeitosMB.classe.patrimonio}' ?"></h:outputText> <br/><br/>
+
+                <p:commandButton value="Deletar" icon="ui-icon-plus" action="#{classedefeitosMB.deleteClasse()}"
+                                 update=":messageGrowl :classedefeitosForm:classedefeitosTable"
+                                 oncomplete="closeDialogIfSucess(xhr, status, args, classedefeitosDeleteDialogWidget, 'classedefeitosDeleteDialogId')" />
+
+                <p:commandButton value="Cancelar" icon="ui-icon-cancel" actionListener="#{classedefeitosMB.resetClasse()}"
+                                 onclick="classedefeitosDeleteDialogWidget.hide();" type="button" />
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

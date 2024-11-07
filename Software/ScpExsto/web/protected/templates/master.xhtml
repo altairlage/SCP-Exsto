@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <title>SCPExsto</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/meu.css" rel="stylesheet" type="text/css" />
+    </h:head>
+
+    <h:body>
+        <p:growl id="messageGrowl" />
+        <p:layout fullPage="true">
+
+            <f:view contentType="text/html; charset=UTF-8" encoding="UTF-8" >
+
+                <p:layoutUnit position="north" resizable="false" closable="false"  style="border: 0" collapsible="false" size="125" >
+                    <ui:insert name="divTop">
+                        <div id="divTop" style="vertical-align: middle; " >
+                            <ui:include src="/protected/templates/top.xhtml" />
+                        </div>
+                    </ui:insert>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" resizable="true" collapsible="false" style="border: 0">
+                    <ui:insert name="divLeft">
+                        <div id="divLeft">
+                            <ui:include src="/protected/templates/left.xhtml" />
+                        </div>
+                    </ui:insert>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center" style="border: 0"> 
+                    <div id="divMain">
+
+                        <ui:insert name="divMain" />
+                    </div>
+                </p:layoutUnit>
+
+                <h:outputScript library="javascript" name="jscodes.js" />
+            </f:view>
+        </p:layout>
+    </h:body>
+</html>

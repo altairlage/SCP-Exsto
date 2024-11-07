@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <p:dialog widgetVar="classedefeitosUpdateDialogWidget"
+                  id="classedefeitosUpdateDialogId" modal="true"
+                  closable="false" draggable="true" resizable="false"
+                  appendToBody="true" showEffect="drop" hideEffect="drop"
+                  closeOnEscape="true">
+            <h:form id="classedefeitosUpdateDialogForm" prependId="false">
+
+                <p:focus for="impclassedefeitosUpdate"/>
+                <h:panelGrid columns="2">
+
+                    <h:outputText value="* Descrição:" />
+                    <h:outputText value="#{classedefeitosMB.classe.descricao}" id="impclassedefeitosUpdate"/>
+
+                    <h:outputText value="* Tipo:" />
+                    <p:selectOneMenu id="inpTipoClasseUpdate" value="#{classedefeitosMB.classe.tipo}" required="true" requiredMessage="O tipo de defeito é obrigatório!">  
+                        <f:selectItem itemLabel="Selecione o tipo" itemValue="" />  
+                        <f:selectItems value="#{classedefeitosMB.tipos}" />
+                    </p:selectOneMenu>
+
+                    <p:commandButton value="Atualizar"
+                                     action="#{classedefeitosMB.updateClasse()}"
+                                     update=":messageGrowl :classedefeitosForm:classedefeitosTable"
+                                     oncomplete="closeDialogIfSucess(xhr, status, args, classedefeitosUpdateDialogWidget, 'classedefeitosUpdateDialogId')" />
+                    <p:commandButton value="Cancelar" actionListener="#{classedefeitosMB.resetClasse()}"
+                                     onclick="classedefeitosUpdateDialogWidget.hide();" type="button" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

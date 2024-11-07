@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <p:dialog widgetVar="classesolucaoDetailDialogWidget" id="classesolucaoDetailDialogId" modal="true"
+                  closable="false" draggable="true" resizable="false"
+                  appendToBody="true" showEffect="drop" hideEffect="drop" closeOnEscape="true">
+            <h:form id="classesolucaoDetailDialogForm" prependId="false">
+                <h:panelGrid columns="2">
+                    <h:outputText value="Descrição:" />
+                    <h:outputText value="#{classesolucaoMB.classe.descricao}" />
+                    <h:outputText value="Tipo:" />
+                    <h:outputText value="#{classesolucaoMB.classe.tipo}" />
+
+                    <p:commandButton value="Ok" icon="ui-icon-arrow-1-w" actionListener="#{classesolucaoMB.resetClasse()}"
+                                     onclick="classesolucaoDetailDialogWidget.hide();" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

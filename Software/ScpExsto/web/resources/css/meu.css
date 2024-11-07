@@ -1,0 +1,9 @@
+.ui-widget,  
+.ui-widget .ui-widget {  
+    font-size: 13px !important;  
+}
+
+.emprod {  
+    color: #00FF00;  
+    background-color: #000000;
+}  

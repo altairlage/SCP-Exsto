@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <p:dialog widgetVar="modeloUpdateDialogWidget"
+                  id="modeloUpdateDialogId" modal="true"
+                  closable="false" draggable="true" resizable="false"
+                  appendToBody="true" showEffect="drop" hideEffect="drop"
+                  closeOnEscape="true">
+            
+            <h:form id="modeloUpdateDialogForm" prependId="false">
+                <p:focus for="impModeloUpdate"/>
+                <h:panelGrid columns="2">
+
+                    <h:outputText value="* Modelo:" />
+                    <h:inputText value="#{ModeloMB.modelo.modelo}" required="true" requiredMessage="O modelo é obrigatório!" label="Modelo:" id="impModeloUpdate" >
+                        <f:validateLength minimum="3" />
+                    </h:inputText>
+
+                    <h:outputText value="* Revisão" />
+                    <h:inputText value="#{ModeloMB.modelo.revisao}" required="true" requiredMessage="A revisão é obrigatória!" label="Revisão" >
+                        <f:validateLength minimum="1" />
+                    </h:inputText>
+
+                    <h:outputText value="Descrição:" />
+                    <h:inputText value="#{ModeloMB.modelo.descricao}"  required="false" requiredMessage="A descrição é obrigatória!" label="Descrição:" />
+
+                    <h:outputText value="IT:" />
+                    <h:inputText value="#{ModeloMB.modelo.it}" label="IT:" />
+
+                    <h:outputText value="* Tipo de produto:" />
+                    <p:selectOneMenu id="inpTipoProdutoUpdate" value="#{ModeloMB.modelo.tipo}" required="true" requiredMessage="O tipo de produto é obrigatório!">  
+                        <f:selectItem itemLabel="Selecione o tipo" itemValue="" />  
+                        <f:selectItems value="#{ModeloMB.tiposProduto}" />
+                    </p:selectOneMenu>
+
+                    <p:commandButton value="Atualizar"
+                                     action="#{ModeloMB.updateModelo()}"
+                                     update=":messageGrowl :modelosForm:modelosTable"
+                                     oncomplete="closeDialogIfSucess(xhr, status, args, modeloUpdateDialogWidget, 'modeloUpdateDialogId')" />
+                    <p:commandButton value="Cancelar" actionListener="#{ModeloMB.resetModelo()}"
+                                     onclick="modeloUpdateDialogWidget.hide();" type="button" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

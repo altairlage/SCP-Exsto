@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <p:dialog widgetVar="defeitoDeleteDialogWidget" id="defeitoDeleteDialogId" modal="true"
+                  closable="false" draggable="true" resizable="false"
+                  appendToBody="true" showEffect="drop" hideEffect="drop"
+                  closeOnEscape="true">
+
+            <h:form id="defeitoDeleteDialogForm" prependId="false">
+                <h:outputText value="Tem certeza que deseja deletar o defeito selecionado?" ></h:outputText>
+                <br/>
+                <br/>
+                <p:commandButton value="Deletar" icon="ui-icon-plus" action="#{defeitoMB.delete()}"
+                                 update=":messageGrowl :defeitoForm:defeitoTable"
+                                 oncomplete="closeDialogIfSucess(xhr, status, args, defeitoDeleteDialogWidget, 'defeitoDeleteDialogId')" />
+
+                <p:commandButton value="Cancelar" icon="ui-icon-cancel" actionListener="#{defeitoMB.reset()}"
+                                 onclick="defeitoDeleteDialogWidget.hide();" type="button" />
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

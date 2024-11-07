@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:body>
+        <ui:composition template="/protected/templates/master.xhtml">
+            <ui:define name="divMain">
+                <h:form id="pemForm">
+                    <p:dataTable id="pemTable" value="#{pemMB.todosPems}" var="pem" emptyMessage="Não existem pens cadastrados!" paginator="true" rows="10"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15" >
+
+                        <f:facet name="header">  
+                            Pens 
+                        </f:facet>
+
+                        <p:column sortBy="nserie">
+                            <f:facet name="header">
+                                <h:outputText value="Num. de Série" />
+                            </f:facet>
+                            <h:outputText value="#{pem.nserie}" />
+                        </p:column>
+
+                        <p:column sortBy="refugo">
+                            <f:facet name="header">
+                                <h:outputText value="Refugado" />
+                            </f:facet>
+                            <h:outputText value="Sim" rendered="#{pem.refugo}" />
+                            <h:outputText value="Não" rendered="#{!pem.refugo}" />
+                        </p:column>
+
+                        <p:column sortBy="etapa">
+                            <f:facet name="header">
+                                <h:outputText value="Etapa" />
+                            </f:facet>
+                            <h:outputText value="#{pem.etapa}" />
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Ações" />
+                            </f:facet>
+
+                            <p:commandButton icon="ui-icon-bullet" onclick="pemDetailDialogWidget.show();" update=":pemDetailDialogForm" >
+                                <f:setPropertyActionListener target="#{pemMB.pem}" value="#{pem}" />
+                            </p:commandButton>
+
+                            <p:spacer width="5px" />
+
+                            <p:commandButton icon="ui-icon-pencil" update=":pemUpdateDialogForm" onclick="pemUpdateDialogWidget.show();" >
+                                <f:setPropertyActionListener target="#{pemMB.pem}" value="#{pem}" />
+                            </p:commandButton>
+
+                            <p:spacer width="5px" />
+
+                            <p:commandButton icon="ui-icon-trash" update=":pemDeleteDialogForm" onclick="pemDeleteDialogWidget.show();" >
+                                <f:setPropertyActionListener target="#{pemMB.pem}" value="#{pem}" />
+                            </p:commandButton>
+
+                        </p:column>
+
+                    </p:dataTable>
+
+                    <p:commandButton value="Criar Pen" icon="ui-icon-plus" update=":pemCreateDialogForm"
+                                     actionListener="#{pemMB.resetPem()}" onclick="pemCreateDialogWidget.show();" />
+                </h:form>
+
+                <p:ajaxStatus style="width:64px;height:64px;position:fixed;right:5px;bottom:5px">  
+                    <f:facet name="start">  
+                        <p:graphicImage value="/resources/images/loading.gif" /> 
+                    </f:facet>  
+
+                    <f:facet name="complete">  
+                        <h:outputText value="" />  
+                    </f:facet>  
+                </p:ajaxStatus>
+
+                <ui:include src="/protected/lider/pem/dialog/pemDetailDialog.xhtml" />
+                <ui:include src="/protected/lider/pem/dialog/pemCreateDialog.xhtml" />
+                <ui:include src="/protected/lider/pem/dialog/pemUpdateDialog.xhtml" />
+                <ui:include src="/protected/lider/pem/dialog/pemDeleteDialog.xhtml" />
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

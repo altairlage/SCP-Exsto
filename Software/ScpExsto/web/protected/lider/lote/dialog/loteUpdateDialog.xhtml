@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <p:dialog widgetVar="loteUpdateDialogWidget"
+                  id="loteUpdateDialogId" modal="true"
+                  closable="false" draggable="true" resizable="false"
+                  appendToBody="true" showEffect="drop" hideEffect="drop"
+                  closeOnEscape="true">
+
+            <h:form id="loteUpdateDialogForm" prependId="false">
+                <p:focus for="inpLoteUpdate" />
+                <h:panelGrid columns="2">
+
+                    <h:outputText value="* ID do lote" />
+                    <h:inputText value="#{loteMB.lote.id}" required="true" label="ID" requiredMessage="O ID do lote é obrigatório!" id="inpLoteUpdate" />
+
+                    <h:outputText value="Num. do Pedido" />
+                    <h:inputText value="#{loteMB.lote.npedido}" />
+                    
+                    <h:outputText value="Número de série inicial:" />
+                    <h:inputText value="#{loteMB.lote.NSerieInicial}" required="false" label="NSérie inicial" />
+
+                    <h:outputText value="Número de série final:" />
+                    <h:inputText value="#{loteMB.lote.NSerieFinal}" required="false" label="NSérie final" />
+
+                    <h:outputText value="* Quantidade:" />
+                    <h:inputText value="#{loteMB.lote.qtd}" required="true" label="Quantidade:" requiredMessage="A quantidade do lote é obrigatória!" />
+
+                    <h:outputText value="* Inicio programado:" />
+                    <p:calendar value="#{loteMB.lote.dataProgInicio}" showOn="button" navigator="true" effect="drop" required="true" requiredMessage="A data de inicio programado é obrigatória!"/>
+
+                    <h:outputText value="* Fim programado:" />
+                    <p:calendar value="#{loteMB.lote.dataProgFim}" showOn="button" navigator="true" effect="drop" required="true" requiredMessage="A data de fim programado é obrigatória!"/>
+
+                    <h:outputText value="Observações:" />
+                    <h:inputText value="#{loteMB.lote.observacoes}" required="false" label="Observações:" />
+
+                    <h:outputText value="* Modelo:" />
+                    <h:selectOneMenu
+                        value="#{loteMB.lote.modelo}"
+                        label="Modelo">
+                        <f:selectItem
+                            itemLabel="Selecione o modelo" noSelectionOption="true" />
+                        <f:selectItems
+                            value="#{loteMB.todosModelosObj}"
+                            var="modelo" itemValue="#{modelo}"
+                            itemLabel="#{modelo.modelo}" />
+                    </h:selectOneMenu>
+                    
+                    <h:outputText value="* Status:" />
+                    <p:selectOneMenu id="inpStatusUpdate" value="#{loteMB.lote.status}" required="true" requiredMessage="O status é obrigatório!">  
+                        <f:selectItem itemLabel="Selecione o status" itemValue="" />  
+                        <f:selectItems value="#{loteMB.todosStatus}" />
+                    </p:selectOneMenu>
+                    
+                    <p:commandButton value="Atualizar"
+                                     action="#{loteMB.updateLote()}"
+                                     update=":messageGrowl :loteForm:loteTable"
+                                     oncomplete="closeDialogIfSucess(xhr, status, args, loteUpdateDialogWidget, 'loteUpdateDialogId')" />
+                    <p:commandButton value="Cancelar" actionListener="#{loteMB.resetLote()}"
+                                     onclick="loteUpdateDialogWidget.hide();" type="button" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

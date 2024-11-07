@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition>
+            <h:form id="menuleft">
+                <p:menu>
+                    <p:submenu label="Navegação">  
+                        <p:menuitem value="Home" outcome="/index.xhtml" icon="ui-icon-home"/>
+                    </p:submenu>
+                    <p:submenu label="Cadastros">  
+                        <p:menuitem value="Usuários" icon="ui-icon-gear" outcome="/protected/gerencia/usuario/usuario.xhtml" rendered="#{loginMB.acessoGerente}"/> 
+                        <p:menuitem value="Lotes" icon="ui-icon-gear" outcome="/protected/lider/lote/lote.xhtml" rendered="#{loginMB.acessoLider}"/>
+                        <p:menuitem value="Modelos" icon="ui-icon-gear" outcome="/protected/lider/modelo/modelo.xhtml" rendered="#{loginMB.acessoLider}"/>
+                        <p:menuitem value="Produtos" icon="ui-icon-gear" outcome="/protected/lider/produto/produto.xhtml" rendered="#{loginMB.acessoGerente}"/>
+                        <p:menuitem value="Pens" icon="ui-icon-gear" outcome="/protected/lider/pem/pem.xhtml" rendered="#{loginMB.acessoGerente}"/>
+                        <p:menuitem value="Equip. de Medição" icon="ui-icon-gear" outcome="/protected/gerencia/equipmedicao/equipmedicao.xhtml" rendered="#{loginMB.acessoGerente}"/>
+                        <p:menuitem value="Classes de defeito" icon="ui-icon-gear" outcome="/protected/gerencia/classedefeitos/classedefeitos.xhtml" rendered="#{loginMB.acessoGerente}"/>
+                        <p:menuitem value="Classes de Solução" icon="ui-icon-gear" outcome="/protected/gerencia/classesolucao/classesolucao.xhtml" rendered="#{loginMB.acessoGerente}"/>
+                        <p:menuitem value="Defeitos" icon="ui-icon-gear" outcome="/protected/gerencia/defeito/defeito.xhtml" rendered="#{loginMB.acessoGerente}"/>
+                        
+                    </p:submenu>
+                </p:menu>               
+            </h:form>
+        </ui:composition>
+    </h:body>
+</html>

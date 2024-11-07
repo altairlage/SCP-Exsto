@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>SCPExsto</title>
+        <style type="text/css">
+            #divCenter {
+                width: 400px;
+                height: 180px;
+                left: 50%;
+                margin: -130px 0 0 -210px;
+                padding:10px;
+                position: absolute;
+                top: 30%; }
+            </style>
+        </h:head>
+        <h:body>
+
+
+            <div id="divCenter">
+            <p:panel>
+                <h:form>
+                    <p:focus for="username"/>
+                    <p:graphicImage value="/resources/images/logoexsto.jpg" style="height: 90px; width: 360px;"/> 
+                    <p:messages id="messages" autoUpdate="true"/>
+                    <h:panelGrid columns="2">
+                        <p:outputLabel value="Login:" />
+                        <p:inputText value="#{loginMB.username}" label="Login" id="username" required="true" requiredMessage="É necessário inserir seu login!"/>
+
+                        <p:outputLabel value="Senha:" />
+                        <p:password value="#{loginMB.senha}" label="Senha" id="senha" required="true" autocomplete="off" requiredMessage="Erro! É necessário inserir sua senha." />
+
+                        <p:commandButton action="#{loginMB.login}" value="Entrar" ajax="false" />
+                    </h:panelGrid>
+                </h:form>
+            </p:panel>
+        </div>
+    </h:body>
+</html>

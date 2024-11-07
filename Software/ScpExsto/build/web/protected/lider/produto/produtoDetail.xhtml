@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="/protected/templates/master.xhtml">
+
+            <ui:define name="divMain">
+                <h:form id="produtoDetailForm" prependId="false">
+                    <p:panel header="Produto">
+                        <h:panelGrid columns="2">
+
+                            <h:outputText value="Número de série:"/>
+                            <h:outputText value="#{ProdutoMB.produtoADetalhar.nserie}"/>
+
+                            <h:outputText value="Data de Criação:" />
+                            <h:outputText value="#{ProdutoMB.produtoADetalhar.dataCriacao}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo" />
+                            </h:outputText>
+
+                            <h:outputText value="Refugo:"/>
+                            <h:outputText value="Sim" rendered="#{ProdutoMB.produtoADetalhar.refugo}" />
+                            <h:outputText value="Não" rendered="#{!ProdutoMB.produtoADetalhar.refugo}" />
+
+                            <h:outputText value="Motivo do refugo:"/>
+                            <h:outputText value="#{ProdutoMB.produtoADetalhar.motivoRefugo}"/>
+
+                            <h:outputText value="Etapa de produção:"/>
+                            <h:outputText value="#{ProdutoMB.produtoADetalhar.etapa}"/>
+
+                            <h:outputText value="Lote:"/>
+                            <h:outputText value="#{ProdutoMB.produtoADetalhar.lote.id}"/>
+
+                            <h:outputText value="Modelo:"/>
+                            <h:outputText value="#{ProdutoMB.produtoADetalhar.lote.modelo.modelo}"/>
+
+                            <h:outputText value="Revisão:"/>
+                            <h:outputText value="#{ProdutoMB.produtoADetalhar.lote.modelo.revisao}"/>
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <p:dataTable id="produtoTable" value="#{ProdutoMB.listaPemsDetail}" var="pem" emptyMessage="Não existem Pems vinculados a este Produto!" paginator="true" rows="10"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15" >
+
+                        <f:facet name="header">  
+                            Pems deste produto
+                        </f:facet>
+
+                        <p:column sortBy="nserie">
+                            <f:facet name="header">
+                                <h:outputText value="Número de série" />
+                            </f:facet>
+                            <h:outputText value="#{pem.nserie}" />
+                        </p:column>
+
+                        <p:column sortBy="refugo">
+                            <f:facet name="header">
+                                <h:outputText value="Refugo" />
+                            </f:facet>
+                            <h:outputText value="Sim" rendered="#{!pem.refugo}" />
+                            <h:outputText value="Não" rendered="#{pem.refugo}" />
+                        </p:column>
+
+                        <p:column sortBy="etapa">
+                            <f:facet name="header">
+                                <h:outputText value="Etapa" />
+                            </f:facet>
+                            <h:outputText value="#{pem.etapa}" />
+                        </p:column>
+
+                        <p:column sortBy="etapa">
+                            <f:facet name="header">
+                                <h:outputText value="Modelo" />
+                            </f:facet>
+                            <h:outputText value="#{pem.modelo.modelo}" />
+                        </p:column>
+                        
+                        <p:column sortBy="revisao">
+                            <f:facet name="header">
+                                <h:outputText value="Revisão" />
+                            </f:facet>
+                            <h:outputText value="#{pem.modelo.revisao}" />
+                        </p:column>
+                    </p:dataTable>
+
+                    <p:commandButton value="Voltar" icon="ui-icon-arrowthick-1-7" action="#{ProdutoMB.voltar()}"   
+                                     ajax="false"  /> 
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

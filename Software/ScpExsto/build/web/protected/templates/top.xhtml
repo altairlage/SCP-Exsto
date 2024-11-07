@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:body>   
+        <ui:composition>
+            <div id="topMessage" >
+                <div style="float: left; height: 10%; width: 60%;">
+                    <p:graphicImage value="/resources/images/logoexsto.jpg" style="height: 100px; width: 400px;"/>
+                </div>
+                <div style="float: right;">
+                    <h:form>
+                        Bem vindo
+                        <p:menuButton value="#{loginMB.usuario.nome}">
+                            <p:menuitem value="Logout" action="#{loginMB.logout()}" icon="ui-icon-power"/>
+                            <p:separator />
+                            <p:menuitem value="Mudar senha" url="/public/mudaSenha.xhtml" icon="ui-icon-key"/>
+                        </p:menuButton>
+                    </h:form>
+                </div>
+            </div>
+        </ui:composition>   
+    </h:body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <p:dialog widgetVar="classesolucaoDeleteDialogWidget" id="classesolucaoDeleteDialogId" modal="true"
+                  closable="false" draggable="true" resizable="false"
+                  appendToBody="true" showEffect="drop" hideEffect="drop"
+                  closeOnEscape="true">
+            <h:form id="classesolucaoDeleteDialogForm" prependId="false">
+
+                <h:outputText value="Tem certeza que deseja deletar a classe '#{classesolucaoMB.classe.descricao}' ?"></h:outputText> <br/><br/>
+
+                <p:commandButton value="Deletar" icon="ui-icon-plus" action="#{classesolucaoMB.deleteClasse()}"
+                                 update=":messageGrowl :classesolucaoForm:classesolucaoTable"
+                                 oncomplete="closeDialogIfSucess(xhr, status, args, classesolucaoDeleteDialogWidget, 'classesolucaoDeleteDialogId')" />
+
+                <p:commandButton value="Cancelar" icon="ui-icon-cancel" actionListener="#{classesolucaoMB.resetClasse()}"
+                                 onclick="classesolucaoDeleteDialogWidget.hide();" type="button" />
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

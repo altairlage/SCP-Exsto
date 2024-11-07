@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="/protected/templates/master.xhtml">
+
+            <ui:define name="divMain">
+                <h:form id="loteDetailForm" prependId="false">
+                    <p:panel header="Lote">
+                        <h:panelGrid columns="2">
+
+                            <h:outputText value="ID do lote:"/>
+                            <h:outputText value="#{loteMB.loteADetalhar.id}"/>
+                            
+                            <h:outputText value="Número do pedido:"/>
+                            <h:outputText value="#{loteMB.loteADetalhar.npedido}"/>
+
+                            <h:outputText value="Data de criação:" />
+                            <h:outputText value="#{loteMB.loteADetalhar.dataCriacao}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo" />
+                            </h:outputText>
+
+                            <h:outputText value="Modelo:"/>
+                            <h:outputText value="#{loteMB.modeloDetail.modelo}"/>
+
+                            <h:outputText value="Área do produto:"/>
+                            <h:outputText value="#{loteMB.modeloDetail.tipo}"/>
+
+                            <h:outputText value="Número de série inicial:"/>
+                            <h:outputText value="#{loteMB.loteADetalhar.NSerieInicial}"/>
+
+                            <h:outputText value="Número de série final:"/>
+                            <h:outputText value="#{loteMB.loteADetalhar.NSerieFinal}"/>
+
+                            <h:outputText value="Quantidade programada:"/>
+                            <h:outputText value="#{loteMB.loteADetalhar.qtd}"/>
+
+                            <h:outputText value="Quantidade atual:"/>
+                            <h:outputText value="#{loteMB.loteADetalhar.qtdAtual}"/>
+                            
+                            <h:outputText value="Status:"/>
+                            <h:outputText value="#{loteMB.loteADetalhar.status}"/>
+
+                            <h:outputText value="Data de produção:"/>
+                            <h:outputText value="#{loteMB.loteADetalhar.dataProd}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo"/>
+                            </h:outputText>
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <p:dataTable id="loteTable" value="#{loteMB.listaProdutosDetail}" var="produto" emptyMessage="Não existem produtos vinculados a este lote!" paginator="true" rows="10"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15" >
+
+                        <f:facet name="header">  
+                            Produtos deste lote 
+                        </f:facet>
+
+                        <p:column sortBy="nserie">
+                            <f:facet name="header">
+                                <h:outputText value="Número de série" />
+                            </f:facet>
+                            <h:outputText value="#{produto.nserie}" />
+                        </p:column>
+
+                        <p:column sortBy="dataProducao">
+                            <f:facet name="header">
+                                <h:outputText value="Data de produção" />
+                            </f:facet>
+                            <h:outputText value="#{produto.dataCriacao}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column sortBy="etapa">
+                            <f:facet name="header">
+                                <h:outputText value="Etapa" />
+                            </f:facet>
+                            <h:outputText value="#{produto.etapa}" />
+                        </p:column>
+
+                        <p:column sortBy="refugo">
+                            <f:facet name="header">
+                                <h:outputText value="Refugo" />
+                            </f:facet>
+                            <h:outputText value="Não" rendered="#{!produto.refugo}" />
+                            <h:outputText value="Sim" rendered="#{produto.refugo}" />
+                        </p:column>
+
+                        <p:column sortBy="motivoRefugo">
+                            <f:facet name="header">
+                                <h:outputText value="Motivo do refugo" />
+                            </f:facet>
+                            <h:outputText value="#{!produto.motivoRefugo}" rendered="#{produto.refugo}" />
+                        </p:column>
+
+                    </p:dataTable>
+
+                    <p:commandButton value="Voltar" icon="ui-icon-arrowthick-1-7" action="#{loteMB.voltar()}"   
+                                     ajax="false"  /> 
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

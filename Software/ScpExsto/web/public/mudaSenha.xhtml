@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="/protected/templates/master.xhtml">
+            <ui:define name="divMain">
+                <p:panel header="Mudança de senha">
+                    <h:form id="changeSenhaForm" prependId="false">
+                        <p:focus for="senhachangepublico"/>
+                        <h3>Utilize o campo abaixo para modificar sua senha:</h3>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="* Nova senha:" />
+                            <p:password id="senhachangepublico" value="#{loginMB.novaSenha}" feedback="true"   
+                                        promptLabel="Insira a nova senha" weakLabel="Fraca"  
+                                        goodLabel="Boa" strongLabel="Forte" inline="false" 
+                                        required="true" requiredMessage="A senha é obrigatória!"/>
+                            <h:outputText value="* Confirme sua senha:" />
+                            <p:password value="#{loginMB.novaSenhaConfirm}" feedback="true"   
+                                        promptLabel="Confirme a nova senha" weakLabel="Fraca"  
+                                        goodLabel="Boa" strongLabel="Forte" inline="false" 
+                                        required="true" requiredMessage="A confirmação de senha é obrigatória!"/>
+
+                            <p:commandButton value="Confirmar"
+                                             update=":messageGrowl :changeSenhaForm"
+                                             action="#{loginMB.mudaSenhaPublico()}" />
+                            <p:commandButton value="Cancelar" onclick="history.back()" type="button" />
+                        </h:panelGrid>
+                    </h:form>
+                </p:panel>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

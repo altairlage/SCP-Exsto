@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <p:dialog widgetVar="pemUpdateDialogWidget"
+                  id="pemUpdateDialogId" modal="true"
+                  closable="false" draggable="true" resizable="false"
+                  appendToBody="true" showEffect="drop" hideEffect="drop"
+                  closeOnEscape="true">
+
+            <h:form id="pemUpdateDialogForm" prependId="false">
+                <p:focus for="inpPemUpdate"/>
+                <h:panelGrid columns="2">
+
+                    <h:outputText value="* Num. de Série" />
+                    <h:inputText value="#{pemMB.pem.nserie}" required="true" requiredMessage="O número de série é obrigatório!" id="inpPemUpdate"/>
+
+                    <h:outputText value="* Refugado?" />
+                    <p:selectBooleanCheckbox value="#{pemMB.pem.refugo}" />
+
+                    <h:outputText value="Motivo do Refugo:" />
+                    <h:inputText value="#{pemMB.pem.motivoRefugo}" disabled="#{pemMB.pem.refugo}" required="false" />
+
+                    <h:outputText value="* Etapa:" />
+                    <p:selectOneMenu id="inpEtapaUpdate" value="#{pemMB.pem.etapa}" required="true" requiredMessage="A etapa é obrigatória!">  
+                        <f:selectItem itemLabel="Selecione a etapa" itemValue="" />  
+                        <f:selectItems value="#{pemMB.etapasPem}" />
+                    </p:selectOneMenu>
+
+                    <h:outputText value="* Modelo:" />
+                    <h:selectOneMenu
+                        value="#{pemMB.pem.modelo}"
+                        label="Modelo">
+                        <f:selectItem
+                            itemLabel="Selecione o modelo" noSelectionOption="true" />
+                        <f:selectItems
+                            value="#{pemMB.todosModelosObj}"
+                            var="modelo" itemValue="#{modelo}"
+                            itemLabel="#{modelo.modelo}" />
+                    </h:selectOneMenu>
+
+                    <p:commandButton value="Atualizar"
+                                     action="#{pemMB.updatePem()}"
+                                     update=":messageGrowl :pemForm:pemTable"
+                                     oncomplete="closeDialogIfSucess(xhr, status, args, pemUpdateDialogWidget, 'pemUpdateDialogId')" />
+                    <p:commandButton value="Cancelar" actionListener="#{pemMB.resetPem()}"
+                                     onclick="pemUpdateDialogWidget.hide();" type="button" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

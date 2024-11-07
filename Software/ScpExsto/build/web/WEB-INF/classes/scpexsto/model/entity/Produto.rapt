@@ -1,0 +1,13 @@
+scpexsto/model/entity/InspecaoVisual_.java
+scpexsto/model/entity/Produto_.java
+scpexsto/model/entity/ClasseDefeitos_.java
+scpexsto/model/entity/Usuario_.java
+scpexsto/model/entity/Modelo_.java
+scpexsto/model/entity/EquipamentoMedicao_.java
+scpexsto/model/entity/Lote_.java
+scpexsto/model/entity/Pem_.java
+scpexsto/model/entity/Retrabalho_.java
+scpexsto/model/entity/TesteEletrico_.java
+scpexsto/model/entity/Defeito_.java
+scpexsto/model/entity/IntegracaoFinal_.java
+scpexsto/model/entity/InspecaoFinal_.java

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <p:dialog widgetVar="usuarioDetailDialogWidget" id="usuarioDetailDialogId" modal="true"
+                  closable="false" draggable="true" resizable="false"
+                  appendToBody="true" showEffect="drop" hideEffect="drop"
+                  closeOnEscape="true">
+            <h:form id="usuarioDetailDialogForm" prependId="false">
+                <h:panelGrid columns="2">
+                    <h:outputText value="Nome:" />
+                    <h:outputText value="#{usuarioMB.usuario.nome}" />
+                    <h:outputText value="Login:" />
+                    <h:outputText value="#{usuarioMB.usuario.login}" />
+                    <h:outputText value="Email:" />
+                    <h:outputText value="#{usuarioMB.usuario.email}" />
+                    <h:outputText value="Perfil:" />
+                    <h:outputText value="#{usuarioMB.usuario.perfil}" />
+                    <h:outputText value="Ativo:" />
+                    <h:outputText value="#{usuarioMB.usuario.ativo}" />
+                    <p:commandButton value="Ok" icon="ui-icon-arrow-1-w" actionListener="#{usuarioMB.ressetUsuario()}"
+                                     onclick="usuarioDetailDialogWidget.hide();" />
+                </h:panelGrid>
+                
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

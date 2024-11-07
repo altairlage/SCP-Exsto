@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:body>
+        <ui:composition template="/protected/templates/master.xhtml">
+            <ui:define name="divMain">
+                <h3>Bem vindo ao SCP Exsto!</h3>
+                <br/>
+                <p:dataTable id="loteTable" value="#{indexMB.lotesEmProd}" var="lote" emptyMessage="Nenhum lote em produção!" paginator="true" rows="10"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15" >
+
+                    <f:facet name="header">  
+                        Lotes em produção
+                    </f:facet>
+                    
+                    <p:column sortBy="npedido">
+                        <f:facet name="header">
+                            <h:outputText value="Pedido" />
+                        </f:facet>
+
+                        <h:outputText value="#{lote.npedido}" />
+                    </p:column>
+
+                    <p:column sortBy="id">
+                        <f:facet name="header">
+                            <h:outputText value="Lote" />
+                        </f:facet>
+
+                        <h:outputText value="#{lote.id}" />
+                    </p:column>
+                    
+                    <p:column sortBy="modelo">
+                        <f:facet name="header">
+                            <h:outputText value="Modelo" />
+                        </f:facet>
+
+                        <h:outputText value="#{lote.modelo.modelo}" />
+                    </p:column>
+
+                    <p:column sortBy="qtd">
+                        <f:facet name="header">
+                            <h:outputText value="Quantidade" />
+                        </f:facet>
+
+                        <h:outputText value="#{lote.qtd}" />
+                    </p:column>
+
+                    <p:column sortBy="qtdAtual">
+                        <f:facet name="header">
+                            <h:outputText value="Quantidade atual" />
+                        </f:facet>
+
+                        <h:outputText value="#{lote.qtdAtual}" />
+                    </p:column>
+
+                    <p:column sortBy="dataProgInicio">
+                        <f:facet name="header">
+                            <h:outputText value="Data de início" />
+                        </f:facet>
+
+                        <h:outputText value="#{lote.dataProgInicio}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    
+                    <p:column sortBy="dataProgFim">
+                        <f:facet name="header">
+                            <h:outputText value="Data de entrega" />
+                        </f:facet>
+
+                        <h:outputText value="#{lote.dataProgFim}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    
+                </p:dataTable>
+                <br/>
+                <p> Caso necessite de maiores detalhamentos, acesse a opção "Lotes" no menu do sistema.</p>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

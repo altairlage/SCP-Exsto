@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <p:dialog widgetVar="equipmedicaoDetailDialogWidget" id="equipmedicaoDetailDialogId" modal="true"
+                  closable="false" draggable="true" resizable="false"
+                  appendToBody="true" showEffect="drop" hideEffect="drop"
+                  closeOnEscape="true">
+            <h:form id="equipmedicaoDetailDialogForm" prependId="false">
+                <h:panelGrid columns="2">
+                    <h:outputText value="Patrimônio:" />
+                    <h:outputText value="#{equipmedicaoMB.equip.patrimonio}" />
+                    <h:outputText value="Marca:" />
+                    <h:outputText value="#{equipmedicaoMB.equip.marca}" />
+                    <h:outputText value="Modelo:" />
+                    <h:outputText value="#{equipmedicaoMB.equip.modelo}" />
+                    <h:outputText value="Setor:" />
+                    <h:outputText value="#{equipmedicaoMB.equip.setor}" />
+                    <h:outputText value="Data de vencimento da calibração:" />
+                    <h:outputText value="#{equipmedicaoMB.equip.dataVencimento}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="Tipo de equipamento:" />
+                    <h:outputText value="#{equipmedicaoMB.equip.tipo}" />
+                    <p:commandButton value="Ok" icon="ui-icon-arrow-1-w" actionListener="#{equipmedicaoMB.ressetEquip()}"
+                                     onclick="equipmedicaoDetailDialogWidget.hide();" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

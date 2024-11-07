@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <p:dialog widgetVar="usuarioUpdateDialogWidget"
+                  id="usuarioUpdateDialogId" modal="true"
+                  closable="false" draggable="true" resizable="false"
+                  appendToBody="true" showEffect="drop" hideEffect="drop"
+                  closeOnEscape="true">
+            <h:form id="usuarioUpdateDialogForm" prependId="false">
+
+                <p:focus for="impNomeUpdate"/>
+
+                <h:panelGrid columns="2">
+
+                    <h:outputText value="* Nome:" />
+                    <h:inputText value="#{usuarioMB.usuario.nome}" required="true" requiredMessage="O nome é obrigatório!" label="Nome:"  id="impNomeUpdate">
+                        <f:validateLength minimum="3" />
+                    </h:inputText>
+
+                    <h:outputText value="* Email:" />
+                    <h:inputText value="#{usuarioMB.usuario.email}" required="true" requiredMessage="O e-mail é obrigatório!" label="Email:" />
+
+                    <h:outputText value="* Login:" />
+                    <h:inputText value="#{usuarioMB.usuario.login}" required="true" requiredMessage="O login é obrigatório!" label="Login:" />
+
+                    <h:outputText value="* Perfil de acesso:" />
+                    <p:selectOneMenu id="perfilselectupdate" value="#{usuarioMB.usuario.perfil}" required="true" requiredMessage="O perfil é obrigatório!">   
+                        <f:selectItem itemLabel="Selecione o Perfil" itemValue="" />  
+                        <f:selectItems value="#{usuarioMB.perfis}"/>  
+                    </p:selectOneMenu> 
+                    
+                    <h:outputText value="* Ativado?" />
+                    <p:selectBooleanButton value="#{usuarioMB.usuario.ativo}" onLabel="Ativado" offLabel="Desativado" />
+
+                    <p:commandButton value="Atualizar"
+                                     action="#{usuarioMB.updateUsuario()}"
+                                     update=":messageGrowl :usuariosForm:usuariosTable"
+                                     oncomplete="closeDialogIfSucess(xhr, status, args, usuarioUpdateDialogWidget, 'usuarioUpdateDialogId')" />
+                    <p:commandButton value="Cancelar" actionListener="#{usuarioMB.ressetUsuario()}"
+                                     onclick="usuarioUpdateDialogWidget.hide();" type="button" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <p:dialog widgetVar="equipmedicaoCreateDialogWidget"
+                  id="equipmedicaoCreateDialogId" modal="true"
+                  closable="false" draggable="true" resizable="false"
+                  appendToBody="true" showEffect="drop" hideEffect="drop"
+                  closeOnEscape="true" >
+
+            <h:form id="equipmedicaoCreateDialogForm" prependId="false">
+                <p:focus for="impequipmedicaoCreate"/>
+                <h:panelGrid columns="2">
+
+                    <h:outputText value="* Patrimonio:" />
+                    <h:inputText value="#{equipmedicaoMB.equip.patrimonio}" required="true" requiredMessage="O modelo é obrigatório!" label="Modelo:" id="impequipmedicaoCreate" >
+                        <f:validateLength minimum="3" />
+                    </h:inputText>
+
+                    <h:outputText value="* Marca:" />
+                    <h:inputText value="#{equipmedicaoMB.equip.marca}" required="true" requiredMessage="A revisão é obrigatória!" label="Revisão" >
+                        <f:validateLength minimum="1" />
+                    </h:inputText>
+
+                    <h:outputText value="* Modelo:" />
+                    <h:inputText value="#{equipmedicaoMB.equip.modelo}"  required="false" requiredMessage="A descrição é obrigatório!" label="Descrição:" />
+
+                    <h:outputText value="* Setor:" />
+                    <h:inputText value="#{equipmedicaoMB.equip.setor}" label="IT:" />
+
+                    <h:outputText value="* Venc. da Calibração:" />
+                    <p:calendar value="#{equipmedicaoMB.equip.dataVencimento}" navigator="true" effect="drop" required="true" requiredMessage="A data de vencimento da calibração é obrigatória!"/>
+                    
+                    <h:outputText value="* Tipo:" />
+                    <p:selectOneMenu id="inpTipoEquipCreate" value="#{equipmedicaoMB.equip.tipo}" required="true" requiredMessage="O tipo de equipamento é obrigatório!">  
+                        <f:selectItem itemLabel="Selecione o tipo" itemValue="" />  
+                        <f:selectItems value="#{equipmedicaoMB.tipos}" />
+                    </p:selectOneMenu>
+
+                    <p:commandButton value="Criar"
+                                     action="#{equipmedicaoMB.createEquip()}"
+                                     update=":messageGrowl :equipmedicaoForm:equipmedicaoTable"
+                                     oncomplete="closeDialogIfSucess(xhr, status, args, equipmedicaoCreateDialogWidget, 'equipmedicaoCreateDialogId')" />
+                    <p:commandButton value="Cancelar" actionListener="#{equipmedicaoMB.ressetEquip()}"
+                                     onclick="equipmedicaoCreateDialogWidget.hide();" type="button" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

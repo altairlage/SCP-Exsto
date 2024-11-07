@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <p:dialog widgetVar="produtoCreateDialogWidget"
+                  id="produtoCreateDialogId" modal="true"
+                  closable="false" draggable="true" resizable="false"
+                  appendToBody="true" showEffect="drop" hideEffect="drop"
+                  closeOnEscape="true">
+
+            <h:form id="produtoCreateDialogForm" prependId="false">
+                <p:focus for="inpProdutoCreate"/>
+                <h:panelGrid columns="2">
+
+                    <h:outputText value="* Num. de Série" />
+                    <h:inputText value="#{ProdutoMB.produto.nserie}" required="true" requiredMessage="O número de série é obrigatório!" id="inpProdutoCreate"/>
+                    
+                    <h:outputText value="* Refugado?" />
+                    <p:selectBooleanCheckbox value="#{ProdutoMB.produto.refugo}" />
+                    
+                    <h:outputText value="Motivo do Refugo:" />
+                    <h:inputText value="#{ProdutoMB.produto.motivoRefugo}" disabled="#{ProdutoMB.produto.refugo}" required="false" />
+
+                    <h:outputText value="* Data de Produção:" />
+                    <p:calendar value="#{ProdutoMB.produto.dataCriacao}" navigator="true" effect="drop" required="true" requiredMessage="A data de produção é obrigatória!"/>
+
+                    <h:outputText value="* Etapa:" />
+                    <p:selectOneMenu id="inpEtapaCreate" value="#{ProdutoMB.produto.etapa}" required="true" requiredMessage="A etapa é obrigatória!">  
+                        <f:selectItem itemLabel="Selecione a etapa" itemValue="" />  
+                        <f:selectItems value="#{ProdutoMB.etapasProduto}" />
+                    </p:selectOneMenu>
+                    
+                    <h:outputText value="* Lote:" />
+                    <h:selectOneMenu
+                        value="#{ProdutoMB.produto.lote}"
+                        label="Lote">
+                        <f:selectItem
+                            itemLabel="Selecione o lote" noSelectionOption="true" />
+                        <f:selectItems
+                            value="#{ProdutoMB.todosLotes}"
+                            var="lote" itemValue="#{lote}"
+                            itemLabel="#{lote.id}" />
+                    </h:selectOneMenu>
+                    
+                    <p:commandButton value="Criar"
+                                     action="#{ProdutoMB.createProduto()}"
+                                     update=":messageGrowl :produtoForm:produtoTable"
+                                     oncomplete="closeDialogIfSucess(xhr, status, args, produtoCreateDialogWidget, 'produtoCreateDialogId')" />
+                    <p:commandButton value="Cancelar" actionListener="#{ProdutoMB.resetProduto()}"
+                                     onclick="produtoCreateDialogWidget.hide();" type="button" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

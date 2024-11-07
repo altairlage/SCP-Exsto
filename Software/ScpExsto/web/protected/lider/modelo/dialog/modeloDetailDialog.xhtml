@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <p:dialog widgetVar="modeloDetailDialogWidget" id="modeloDetailDialogId" modal="true"
+                  closable="false" draggable="true" resizable="false"
+                  appendToBody="true" showEffect="drop" hideEffect="drop"
+                  closeOnEscape="true">
+            <h:form id="modeloDetailDialogForm" prependId="false">
+                <h:panelGrid columns="2">
+                    <h:outputText value="Modelo:" />
+                    <h:outputText value="#{ModeloMB.modelo.modelo}" />
+                    <h:outputText value="Revisão" />
+                    <h:outputText value="#{ModeloMB.modelo.revisao}" />
+                    <h:outputText value="Descrição" />
+                    <h:outputText value="#{ModeloMB.modelo.descricao}" />
+                    <h:outputText value="IT:" />
+                    <h:outputText value="#{ModeloMB.modelo.it}" />
+                    <h:outputText value="Tipo:" />
+                    <h:outputText value="#{ModeloMB.modelo.tipo}" />
+                    <p:commandButton value="Ok" icon="ui-icon-arrow-1-w" actionListener="#{ModeloMB.resetModelo()}"
+                                     onclick="modeloDetailDialogWidget.hide();" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <p:dialog widgetVar="defeitoDetailDialogWidget" id="defeitoDetailDialogId" modal="true"
+                  closable="false" draggable="true" resizable="false"
+                  appendToBody="true" showEffect="drop" hideEffect="drop"
+                  closeOnEscape="true">
+            <h:form id="defeitoDetailDialogForm" prependId="false">
+                <p:focus for="inploc1update" />
+                <h:panelGrid columns="2">
+                    <h:outputText value="Localização 1:"/>
+                    <h:outputText value="#{defeitoMB.defeito.loc1}" id="inploc1update"/>
+                    
+                    <h:outputText value="Localização 2:"/>
+                    <h:outputText value="#{defeitoMB.defeito.loc2}"/>
+                    
+                    <h:outputText value="Localização 3:"/>
+                    <h:outputText value="#{defeitoMB.defeito.loc3}"/>
+                    
+                    <h:outputText value="Localização 4:"/>
+                    <h:outputText value="#{defeitoMB.defeito.loc4}"/>
+                    
+                    <h:outputText value="Localização 5:"/>
+                    <h:outputText value="#{defeitoMB.defeito.loc5}"/>
+
+                    <h:outputText value="Observações:"/>
+                    <h:outputText value="#{defeitoMB.defeito.observacoes}"/>
+                    
+                    <h:outputText value="Descrição do defeito:"/>
+                    <h:outputText value="#{defeitoMB.defeito.classeDefeito.descricao}"/>
+                    
+                    <h:outputText value="Tipo do defeito:"/>
+                    <h:outputText value="#{defeitoMB.defeito.classeDefeito.tipo}"/>
+                    
+                    <h:outputText value="Descrição da solução:"/>
+                    <h:outputText value="#{defeitoMB.defeito.classeSolucao.descricao}"/>
+                    
+                    <h:outputText value="Tipo da solução:"/>
+                    <h:outputText value="#{defeitoMB.defeito.classeSolucao.tipo}"/>
+                    
+                </h:panelGrid>
+                
+                <p:commandButton value="Voltar" icon="ui-icon-arrowthick-1-7" action="#{defeitoMB.voltar()}" ajax="false"  /> 
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>
